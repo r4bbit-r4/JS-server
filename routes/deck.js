@@ -5,7 +5,6 @@ let sessionMW = require("../middleware/auth/session");
 
 // Rendering middlewares
 let renderMW = require("../middleware/render/render");
-let renderLoggedinMW = require("../middleware/render/renderLoggedin")
 
 // User handling middlewares
 let createDeckMW = require("../middleware/deck/createDeck")
@@ -24,12 +23,17 @@ module.exports = function (app) {
     * Define routes below
     * */
 
+    // Get decks from database
+    app.get("/deck",
+        getDeckMW(objectrepository),
+    );
+
 
     // Get deck modification page, handle session presence, then get deck data and render page
     app.get("/deck/edit",
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'updatedeck')
     );
 
     // Post data to modification age, handle session then update the deck
@@ -37,7 +41,7 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
             updateDeckMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'user')
     );
 
     // Post data to deck removal page, handle session then remove the deck, then redirect back to user home
@@ -45,14 +49,14 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
             deleteDeckMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'user')
     );
 
     // Post data to deck creation page
     app.post("/deck/create",
             sessionMW(objectrepository),
             createDeckMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'user')
     );
 
 };

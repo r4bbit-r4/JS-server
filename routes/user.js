@@ -5,13 +5,14 @@ let sessionMW = require("../middleware/auth/session");
 
 // Rendering middlewares
 let renderMW = require("../middleware/render/render");
-let renderLoggedinMW = require("../middleware/render/renderLoggedin")
 
 // User handling middlewares
 let getUserMW = require("../middleware/user/getUser");
 let deleteUserMW = require("../middleware/user/deleteUser");
 let updateUserMW = require("../middleware/user/updateUser");
-let createUserMW = require("../middleware/user/createUser")
+
+// Deck listing middlewares
+let getDeckMW = require("../middleware/deck/getTopDecks");
 
 // Export model to use throughout the defined routes
 module.exports = function (app) {
@@ -27,14 +28,15 @@ module.exports = function (app) {
     app.get("/user",
             sessionMW(objectrepository),
             getUserMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            getDeckMW(objectrepository),
+            renderMW(objectrepository,'user')
     );
 
     // Get user modification page, handle session presence, then get user data and render page
     app.get("/user/edit",
             sessionMW(objectrepository),
             getUserMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'updateuser')
     );
 
     // Post data to modification age, handle session then update the user
@@ -42,7 +44,8 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getUserMW(objectrepository),
             updateUserMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            getDeckMW(objectrepository),
+            renderMW(objectrepository,'user')
     );
 
     // Post data to user removal page, handle session then remove the user
@@ -50,7 +53,8 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getUserMW(objectrepository),
             deleteUserMW(objectrepository),
-            renderMW(objectrepository)
+            getDeckMW(objectrepository),
+            renderMW(objectrepository, 'user')
     );
 
 };

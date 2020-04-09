@@ -6,12 +6,11 @@ let authMW = require("../middleware/auth/auth")
 
 // Rendering middlewares
 let renderMW = require("../middleware/render/render")
-let renderLoggedinMW = require("../middleware/render/renderLoggedin")
 
 // User handling middlewares
 let getUserMW = require("../middleware/user/getUser");
 let createUserMW = require("../middleware/user/createUser");
-let getTopDecksMW = require("../middleware/deck/getTopDecks")
+let getDeckMW = require("../middleware/deck/getTopDecks")
 
 
 // Export model to use throughout the defined routes
@@ -26,33 +25,33 @@ module.exports = function (app) {
 
     // Get main page, if the session token is present get user data and render page accordingly, get top decks anyways
     app.get("/",
-        getTopDecksMW(objectrepository),
+        getDeckMW(objectrepository),
         sessionMW(objectrepository),
         getUserMW(objectrepository),
-        renderLoggedinMW(objectrepository)
+        renderMW(objectrepository, 'index')
     );
 
     // Get login form, simply render it
     app.get("/login",
-            renderMW(objectrepository)
+            renderMW(objectrepository, 'login')
     );
 
     // Post to login form, check provided data and render user page if correct or login page with error instead
     app.post("/login",
             authMW(objectrepository),
             getUserMW(objectrepository),
-            renderLoggedinMW(objectrepository)
+            renderMW(objectrepository,'user')
     );
 
     // Get registration form, simply render it
     app.get("/register",
-            renderMW(objectrepository)
+            renderMW(objectrepository,'register')
     );
 
     // Post data to registration form, this will create the new user then redirect to the login page
     app.post("/register",
             createUserMW(objectrepository),
-            renderMW(objectrepository)
+            renderMW(objectrepository, 'login')
     );
 
 };

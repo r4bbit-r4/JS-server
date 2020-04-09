@@ -1,0 +1,29 @@
+<%- include('header') -%>
+<!-- Navigational bar -->
+<%- include('navbar') -%>
+<!-- Header above main section -->
+<section>
+    <!-- Main section with contents -->
+    <div id="main section" class="w3-row">
+        <!-- Section for the modification form -->
+        <div class="regf w3-col s12 m9 l9">
+            <form method="post" action="/user/edit">
+                <div class="w3-margin">
+                    <h3>Modify your deck</h3>
+                    <label for="creator" class="w3-text-black">Creator:</label>
+                    <input id="creator" class="w3-input" type="text" placeholder="Creator ...">
+                </div>
+
+                <div class="w3-margin">
+                    <label for="content" class="w3-text-black">Content:</label>
+                    <input id="content" class="w3-input" type="text" placeholder="Content ...">
+                </div>
+
+                <div class="w3-margin">
+                    <button class="w3-btn w3-black w3-hover-black w3-left">Update my account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<%- include('footer') -%>

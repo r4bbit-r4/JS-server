@@ -1,0 +1,44 @@
+<%- include('header') -%>
+<!-- Navigational bar -->
+<%- include('navbar') -%>
+<!-- Header above main section -->
+<section>
+    <!-- Main section with contents -->
+    <div id="main section" class="w3-row">
+        <!-- Section for the registration form -->
+        <div class="regf w3-col s12 m9 l9">
+            <form method="post" action="/register">
+                <div class="w3-margin">
+                    <h3>Create an account</h3>
+                    <label for="uname" class="w3-text-black">Username:</label>
+                    <input id="uname" class="w3-input" type="text" placeholder="Username ...">
+                </div>
+
+                <div class="w3-margin">
+                    <label for="email" class="w3-text-black">Email address:</label>
+                    <input id="email" class="w3-input" type="text" placeholder="Email address ...">
+                </div>
+
+                <div class="w3-margin">
+                    <label for="password1" class="w3-text-black">Password:</label>
+                    <input id="password1" class="w3-input" type="text" placeholder="Password ...">
+                </div>
+
+                <div class="w3-margin">
+                    <label for="password2" class="w3-text-black">Password confirmation:</label>
+                    <input id="password2" class="w3-input" type="text" placeholder="Password ...">
+                </div>
+
+                <div class="w3-margin">
+                    <input id="usage" class="w3-check" type="checkbox">
+                    <label for="usage">I accept the Terms of Usage</label>
+                </div>
+
+                <div class="w3-margin">
+                    <button class="w3-btn w3-black w3-hover-black w3-left">Create my account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<%- include('footer') -%>

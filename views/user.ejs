@@ -1,0 +1,73 @@
+<%- include('header') -%>
+<!-- Navigational bar -->
+<%- include('navbar') -%>
+<!-- Header above main section -->
+<section>
+    <!-- Main section with contents -->
+    <div id="main section" class="w3-row">
+        <!-- Section for the registration button -->
+        <div class="reg w3-col s12 m4 l4 w3-left w3-margin w3-righttbar w3-border-black">
+            <div class="w3-margin">
+                <div class="w3-card-4 w3-dark-grey" style="width:80%">
+
+                    <div class="w3-container w3-center w3-padding">
+                        <h3>Your profile</h3>
+                        <img src="static/avatar.png" alt="Avatar" style="width:80%">
+                        <h5>John Doe</h5>
+
+                        <a href="/user/edit"><button class="w3-button w3-green">Modify data</button></a>
+                        <button class="w3-button w3-red">Delete user</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Section for the login form -->
+        <div class="login w3-col s12 m6 l7">
+
+            <!-- Main section with contents -->
+            <div id="list" class="w3-container">
+
+                <h3 class="w3-padding">Your decks</h3>
+                <hr style="width:80%; border-width: 2px; border-color: black">
+
+                <div id="main section" class="w3-container">
+                    <% decklist.forEach( function(deck) { %>
+                        <!-- Subsection that represents one deck -->
+                        <div class="w3-row w3-border w3-hover-white">
+                            <!-- Deck's title -->
+                            <div class="title w3-col m6 l7 s12 w3-text-black w3-left">
+                                <h5><%= deck.title %></h5>
+                            </div>
+                            <!-- Deck option bar -->
+                            <div class="w3-col m5 l3 s12 w3-right">
+                                <!-- Buttons -->
+                                <button class="w3-btn w3-black w3-hover-black">Download</button>
+                                <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn w3-black w3-hover-black">Details</button>
+                                <button class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
+                                <button class="w3-btn w3-blue"><i class="fa fa-pencil"></i></button>
+                                <!-- Details modal -->
+                                <div id="id01" class="w3-modal">
+                                    <div class="w3-modal-content">
+                                        <div class="w3-container">
+                                <span onclick="document.getElementById('id01').style.display='none'"
+                                      class="w3-button w3-display-topright">&times;</span>
+                                            <b><%= deck.title %></b>
+                                            <hr style="border-top: 1px solid black">
+                                            <%= deck.content %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of DECK -->
+                    <% }); %>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+<%- include('footer') -%>
