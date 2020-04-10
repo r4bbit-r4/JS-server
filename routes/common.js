@@ -10,7 +10,11 @@ let renderMW = require("../middleware/render/render")
 // User handling middlewares
 let getUserMW = require("../middleware/user/getUser");
 let createUserMW = require("../middleware/user/createUser");
-let getDeckMW = require("../middleware/deck/getTopDecks")
+let updateUserMW = require("../middleware/user/updateUser");
+
+// Deck handling
+let getDeckMW = require("../middleware/deck/getTopDecks");
+
 
 
 // Export model to use throughout the defined routes
@@ -27,19 +31,20 @@ module.exports = function (app) {
     app.get("/",
         getDeckMW(objectrepository),
         sessionMW(objectrepository),
-        getUserMW(objectrepository),
+        //getUserMW(objectrepository), // To avoid rendering the navbar in logged in state every time
         renderMW(objectrepository, 'index')
     );
 
     // Get login form, simply render it
     app.get("/login",
-            renderMW(objectrepository, 'login')
+        renderMW(objectrepository, 'login')
     );
 
     // Post to login form, check provided data and render user page if correct or login page with error instead
     app.post("/login",
             authMW(objectrepository),
             getUserMW(objectrepository),
+            getDeckMW(objectrepository),
             renderMW(objectrepository,'user')
     );
 
@@ -52,6 +57,23 @@ module.exports = function (app) {
     app.post("/register",
             createUserMW(objectrepository),
             renderMW(objectrepository, 'login')
+    );
+
+    // Send password reset email
+    app.get("/send_reset",
+        renderMW(objectrepository, 'send_reset')
+    );
+
+    // Get password reset page
+    app.get("/reset",
+            renderMW(objectrepository, 'reset')
+    );
+
+    // Reset password for user
+    app.post("/reset",
+        getUserMW(objectrepository),
+        updateUserMW(objectrepository),
+        renderMW(objectrepository, 'login')
     );
 
 };

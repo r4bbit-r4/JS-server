@@ -1,6 +1,10 @@
 <!-- Navigational bar -->
 <nav class="w3-bar w3-black">
     <a href="/" class="w3-bar-item w3-button w3-left w3-hover-black"><h3><b>The Library</b></h3></a>
-    <a href="/login" id="nav3" class="navbar w3-bar-item w3-button w3-right w3-hover-black"><h5>Log In</h5></a>
+    <% if (typeof loggedin === 'undefined') { %>
+        <a href="/login" id="nav3" class="navbar w3-bar-item w3-button w3-right w3-hover-black"><h5>Log In</h5></a>
+    <%} else if (loggedin === true) {%>
+        <a href="/user" id="nav3" class="navbar w3-bar-item w3-button w3-right w3-hover-black"><h5>Profile</h5></a>
+    <% } %>
     <a href="/" id="nav2" class="navbar w3-bar-item w3-button w3-right w3-hover-black"><h5>Browse</h5></a>
 </nav>

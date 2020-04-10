@@ -7,30 +7,32 @@
     <div id="main section" class="w3-row">
         <!-- Section for the password reset form -->
         <div class="regf w3-col s12 m9 l9">
+            <form method="post" action="/reset">
 
-            <div class="w3-margin">
-                <h2>Type your new password below!</h2>
-                <p><b>BE WARE</b> By typing in your new password, your previous one will be lost.</p>
-            </div>
+                <div class="w3-margin">
+                    <h2>Type your new password below!</h2>
+                    <p><b>BE WARE</b> By typing in your new password, your previous one will be lost.</p>
+                </div>
 
-            <div class="w3-margin">
-                <p> </p>
-            </div>
+                <div class="w3-margin">
+                    <p> </p>
+                </div>
 
-            <div class="w3-margin">
-                <label for="password1" class="w3-text-black">Password:</label>
-                <input id="password1" class="w3-input" type="text" placeholder="Password ...">
-            </div>
+                <div class="w3-margin">
+                    <label for="password1" class="w3-text-black">Password:</label>
+                    <input id="password1" class="w3-input" type="text" name="password" placeholder="Password ...">
+                </div>
 
-            <div class="w3-margin">
-                <label for="password2" class="w3-text-black">Password confirmation:</label>
-                <input id="password2" class="w3-input" type="text" placeholder="Password ...">
-            </div>
+                <div class="w3-margin">
+                    <label for="password2" class="w3-text-black">Password confirmation:</label>
+                    <input id="password2" class="w3-input" type="text" name="passwordagain" placeholder="Password ...">
+                </div>
 
-            <div class="w3-margin">
-                <button class="w3-btn w3-black w3-hover-black w3-left">Reset my password</button>
-            </div>
+                <div class="w3-margin">
+                    <button type="submit" class="w3-btn w3-black w3-hover-black w3-left">Reset my password</button>
+                </div>
 
+            </form>
         </div>
     </div>
 

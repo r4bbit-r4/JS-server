@@ -7,30 +7,31 @@
     <div id="main section" class="w3-row">
         <!-- Section for the modification form -->
         <div class="regf w3-col s12 m9 l9">
-            <form method="post" action="/user/edit">
+            4<form method="post" action="/user/edit">
+
                 <div class="w3-margin">
                     <h3>Modify your information</h3>
                     <label for="uname" class="w3-text-black">Username:</label>
-                    <input id="uname" class="w3-input" type="text" placeholder="Username ...">
+                    <input id="uname" class="w3-input" type="text" name="name" value="<%= name%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="email" class="w3-text-black">Email address:</label>
-                    <input id="email" class="w3-input" type="text" placeholder="Email address ...">
+                    <input id="email" class="w3-input" type="text" name="email" value="<%= address%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="password1" class="w3-text-black">Password:</label>
-                    <input id="password1" class="w3-input" type="text" placeholder="Password ...">
+                    <input id="password1" class="w3-input" type="text" name="password" value="<%= password%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="password2" class="w3-text-black">Password confirmation:</label>
-                    <input id="password2" class="w3-input" type="text" placeholder="Password ...">
+                    <input id="password2" class="w3-input" type="text" name="passwordagain" value="<%= password%>">
                 </div>
 
                 <div class="w3-margin">
-                    <button class="w3-btn w3-black w3-hover-black w3-left">Update my account</button>
+                    <button type="submit" class="w3-btn w3-black w3-hover-black w3-left">Update my account</button>
                 </div>
             </form>
         </div>
