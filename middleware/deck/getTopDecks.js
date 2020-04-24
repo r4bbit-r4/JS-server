@@ -1,34 +1,23 @@
 /*
-* Returns the top few decks from the available
+* Returns the top few decks from the available, right now it only
+* returns all the decks added to the database so far
 * */
+const requireoption = require('../../requireOption');
+
 module.exports = function(objectrepository) {
+    // Try loading the DeckModel
+    const DeckModel = requireoption(objectrepository, 'DeckModel');
 
     return function(req, res, next) {
-
-        res.locals.decklist = [
-            {
-                "creator": "md21",
-                "title": "Basics of XSS vulnerabilities",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-            },
-            {
-                "creator": "md21",
-                "title": "Basics of XSS vulnerabilities",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-            },
-            {
-                "creator": "md21",
-                "title": "Basics of XSS vulnerabilities",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-            },
-            {
-                "creator": "md21",
-                "title": "Basics of XSS vulnerabilities",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        // Try loading the deck list
+        DeckModel.find({}, (err, decklist)=> {
+            // If there's an error send it
+            if (err) {
+                return next(err);
             }
-        ];
-
-        return next();
+            // Or continue with resultss
+            res.locals.decklist = decklist;
+            return next();
+        });
     };
-
 };

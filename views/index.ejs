@@ -24,14 +24,16 @@
                     <!-- Buttons -->
                     <button class="w3-btn w3-black w3-hover-black">Download</button>
                     <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn w3-black w3-hover-black">Details</button>
-                    <button class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
-                    <a href="/deck/edit"><button class="w3-btn w3-blue"><i class="fa fa-pencil"></i></button></a>
-                    <!-- Details modal -->
+                    <% if (typeof loggedin != 'undefined') { %>
+                        <button class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
+                        <a href="/deck/edit"><button class="w3-btn w3-blue"><i class="fa fa-pencil"></i></button></a>
+                        <!-- Details modal -->
+                    <% }; %>
                     <div id="id01" class="w3-modal">
                         <div class="w3-modal-content">
                             <div class="w3-container w3-padding">
-                                <span onclick="document.getElementById('id01').style.display='none'"
-                                      class="w3-button w3-display-topright">&times;</span>
+                                    <span onclick="document.getElementById('id01').style.display='none'"
+                                          class="w3-button w3-display-topright">&times;</span>
                                 <b><%= deck.title %></b>
                                 <hr style="border-top: 1px solid black">
                                 <%= deck.content %>

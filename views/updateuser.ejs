@@ -7,27 +7,27 @@
     <div id="main section" class="w3-row">
         <!-- Section for the modification form -->
         <div class="regf w3-col s12 m9 l9">
-            4<form method="post" action="/user/edit">
+            <form method="post" action="/user/edit/<%= user._id%>">
 
                 <div class="w3-margin">
                     <h3>Modify your information</h3>
                     <label for="uname" class="w3-text-black">Username:</label>
-                    <input id="uname" class="w3-input" type="text" name="name" value="<%= name%>">
+                    <input id="uname" class="w3-input" type="text" name="name" value="<%= user.name%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="email" class="w3-text-black">Email address:</label>
-                    <input id="email" class="w3-input" type="text" name="email" value="<%= address%>">
+                    <input id="email" class="w3-input" type="text" name="email" value="<%= user.address%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="password1" class="w3-text-black">Password:</label>
-                    <input id="password1" class="w3-input" type="text" name="password" value="<%= password%>">
+                    <input id="password1" class="w3-input" type="text" name="password1" value="<%= user.password%>">
                 </div>
 
                 <div class="w3-margin">
                     <label for="password2" class="w3-text-black">Password confirmation:</label>
-                    <input id="password2" class="w3-input" type="text" name="passwordagain" value="<%= password%>">
+                    <input id="password2" class="w3-input" type="text" name="password2" value="<%= user.password%>">
                 </div>
 
                 <div class="w3-margin">

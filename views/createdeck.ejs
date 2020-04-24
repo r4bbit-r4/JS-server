@@ -7,21 +7,26 @@
     <div id="main section" class="w3-row">
         <!-- Section for the modification form -->
         <div class="regf w3-col s12 m9 l9">
-            <form method="post" action="/deck/update/<%= deck._id%>">
+            <form method="post" action="/deck/create">
 
                 <div class="w3-margin">
-                    <h3>Modify your deck</h3>
+                    <h3>Create your deck</h3>
                     <label for="title" class="w3-text-black">Title:</label>
-                    <input id="title" class="w3-input" type="text" name="title" value="<%= deck.title %>">
+                    <input id="title" class="w3-input" type="text" name="title" placeholder="Placeholder ...">
+                </div>
+
+                <div class="w3-margin">
+                    <label for="content" class="w3-text-black">Creator:</label>
+                    <input id="content" class="w3-input" type="text" name="creator" placeholder="Creator ...">
                 </div>
 
                 <div class="w3-margin">
                     <label for="content" class="w3-text-black">Content:</label>
-                    <input id="content" class="w3-input" type="text" name="content" value="<%= deck.content %>">
+                    <input id="content" class="w3-input" type="text" name="content" placeholder="Content ...">
                 </div>
 
                 <div class="w3-margin">
-                    <button type="submit" class="w3-btn w3-black w3-hover-black w3-left">Update deck</button>
+                    <button type="submit" class="w3-btn w3-black w3-hover-black w3-left">Create deck</button>
                 </div>
 
             </form>

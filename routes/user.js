@@ -14,11 +14,16 @@ let updateUserMW = require("../middleware/user/updateUser");
 // Deck listing middlewares
 let getDeckMW = require("../middleware/deck/getTopDecks");
 
+// Load user and deck models
+const UserModel = require('../models/user');
+const DeckModel = require('../models/deck');
+
 // Export model to use throughout the defined routes
 module.exports = function (app) {
     let objectrepository = {
+        UserModel: UserModel,
+        DeckModel: DeckModel
     };
-
 
     /*
     * Define routes below
@@ -33,28 +38,27 @@ module.exports = function (app) {
     );
 
     // Get user modification page, handle session presence, then get user data and render page
-    app.get("/user/edit",
+    app.get("/user/edit/:userid",
             sessionMW(objectrepository),
             getUserMW(objectrepository),
             renderMW(objectrepository,'updateuser')
     );
 
     // Post data to modification age, handle session then update the user
-    app.post("/user/edit",
+    app.post("/user/edit/:userid",
             sessionMW(objectrepository),
             getUserMW(objectrepository),
             updateUserMW(objectrepository),
             getDeckMW(objectrepository),
-            renderMW(objectrepository,'user')
+            renderMW(objectrepository, "user")
     );
 
     // Post data to user removal page, handle session then remove the user
-    app.post("/user/del",
+    app.get("/user/del/:userid",
             sessionMW(objectrepository),
             getUserMW(objectrepository),
             deleteUserMW(objectrepository),
-            getDeckMW(objectrepository),
-            renderMW(objectrepository, 'user')
+            renderMW(objectrepository, "login")
     );
 
 };

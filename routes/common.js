@@ -15,13 +15,16 @@ let updateUserMW = require("../middleware/user/updateUser");
 // Deck handling
 let getDeckMW = require("../middleware/deck/getTopDecks");
 
-
+// Load user and deck models
+const UserModel = require('../models/user');
+const DeckModel = require('../models/deck');
 
 // Export model to use throughout the defined routes
 module.exports = function (app) {
     let objectrepository = {
+        UserModel: UserModel,
+        DeckModel: DeckModel
     };
-
 
     /*
     * Define routes below
@@ -31,7 +34,6 @@ module.exports = function (app) {
     app.get("/",
         getDeckMW(objectrepository),
         sessionMW(objectrepository),
-        //getUserMW(objectrepository), // To avoid rendering the navbar in logged in state every time
         renderMW(objectrepository, 'index')
     );
 
@@ -40,10 +42,14 @@ module.exports = function (app) {
         renderMW(objectrepository, 'login')
     );
 
+    // Get login form with a message
+    app.get("/login/:message",
+        renderMW(objectrepository,'login')
+    );
+
     // Post to login form, check provided data and render user page if correct or login page with error instead
     app.post("/login",
             authMW(objectrepository),
-            getUserMW(objectrepository),
             getDeckMW(objectrepository),
             renderMW(objectrepository,'user')
     );
@@ -56,7 +62,6 @@ module.exports = function (app) {
     // Post data to registration form, this will create the new user then redirect to the login page
     app.post("/register",
             createUserMW(objectrepository),
-            renderMW(objectrepository, 'login')
     );
 
     // Send password reset email

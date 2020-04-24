@@ -1,15 +1,24 @@
 /*
 * Returns the decks that match the given search critariea
 * */
+const requireoption = require('../../requireOption');
+
 module.exports = function(objectrepository) {
+    // Try loading the DeckModel
+    const DeckModel = requireoption(objectrepository, 'DeckModel');
 
     return function(req, res, next) {
+        // Try loading the deck list
+        console.log(req.params.deckid);
+        DeckModel.findOne({_id:req.params.deckid}, (err, deck)=> {
+            // If there's an error send it
+            if (err || !deck) {
+                return next(err);
+            }
+            // Or continue with resultss
+            res.locals.deck = deck;
 
-        res.locals.creator = 'md21';
-        res.locals.title = "Basics of XSS vulnerabilities";
-        res.locals.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
-
-        return next();
+            return next();
+        });
     };
-
 };
