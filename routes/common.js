@@ -1,8 +1,9 @@
 /* These routes are responsible for the /user and reated operations */
 
 // Authentication related middlewares
-let sessionMW = require("../middleware/auth/session");
-let authMW = require("../middleware/auth/auth")
+let loadindexMW = require("../middleware/auth/loadindex");
+let authMW = require("../middleware/auth/login")
+let logoutMW = require("../middleware/auth/logout")
 
 // Rendering middlewares
 let renderMW = require("../middleware/render/render")
@@ -33,7 +34,14 @@ module.exports = function (app) {
     // Get main page, if the session token is present get user data and render page accordingly, get top decks anyways
     app.get("/",
         getDeckMW(objectrepository),
-        sessionMW(objectrepository),
+        loadindexMW(objectrepository),
+        renderMW(objectrepository, 'index')
+    );
+
+    // Logout mw, logs user out hten redirects
+    app.get("/logout",
+        logoutMW(objectrepository),
+        getDeckMW(objectrepository),
         renderMW(objectrepository, 'index')
     );
 
@@ -62,6 +70,7 @@ module.exports = function (app) {
     // Post data to registration form, this will create the new user then redirect to the login page
     app.post("/register",
             createUserMW(objectrepository),
+            renderMW(objectrepository, "login")
     );
 
     // Send password reset email

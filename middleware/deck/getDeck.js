@@ -9,13 +9,12 @@ module.exports = function(objectrepository) {
 
     return function(req, res, next) {
         // Try loading the deck list
-        console.log(req.params.deckid);
-        DeckModel.findOne({_id:req.params.deckid}, (err, deck)=> {
+        DeckModel.findOne({_id: req.params.deckid}, (err, deck)=> {
             // If there's an error send it
             if (err || !deck) {
                 return next(err);
             }
-            // Or continue with resultss
+            // Or continue with results
             res.locals.deck = deck;
 
             return next();

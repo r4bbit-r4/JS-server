@@ -10,9 +10,24 @@ app.use(bodyparser.json());
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
 
+// Load session handling
+app.set('trust proxy', 1)
+app.use(session({
+    secret: 'LHU0GL',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
+
+app.use((req,res,next) => {
+    console.log(Date.now());
+    console.log(req.session);
+    return next();
+})
+
 // Handle errors
 app.use((err, req, res, next)=> {
-    res.end('Bummer ...');
+    res.redirect("/");
     console.log(err);
 });
 

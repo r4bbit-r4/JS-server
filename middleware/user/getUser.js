@@ -9,13 +9,15 @@ module.exports = function(objectrepository) {
 
     return function(req, res, next) {
         // Try loading the deck list
-        DeckModel.findOne({_id:req.params.userid}, (err, user)=> {
+        DeckModel.findOne({name: req.body.username}, (err, user)=> {
             // If there's an error send it
-            if (err || !user) {
-                return next(err);
+            if (err || user === 'undefined') {
+                res.redirect("/");
             }
-            // Or continue with resultss
+            // Or continue with results
             res.locals.user = user;
+            console.log(user.name);
+
             return next();
         });
     };

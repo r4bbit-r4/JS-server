@@ -14,6 +14,7 @@ let createDeckMW = require("../middleware/deck/createDeck")
 let getDeckMW = require("../middleware/deck/getDeck");
 let deleteDeckMW = require("../middleware/deck/deleteDeck");
 let updateDeckMW = require("../middleware/deck/updateDeck");
+let getTopDecksMW = require("../middleware/deck/getTopDecks");
 
 // Load user and deck models
 const UserModel = require('../models/user');
@@ -47,7 +48,9 @@ module.exports = function (app) {
     app.post("/deck/update/:deckid",
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
-            updateDeckMW(objectrepository)
+            updateDeckMW(objectrepository),
+            getTopDecksMW(objectrepository),
+            renderMW(objectrepository, 'user')
     );
 
     // Post data to deck removal page, handle session then remove the deck, then redirect back to user home
@@ -55,6 +58,8 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
             deleteDeckMW(objectrepository),
+            getTopDecksMW(objectrepository),
+            renderMW(objectrepository, 'user')
     );
 
     // Post data to deck creation page
@@ -67,6 +72,8 @@ module.exports = function (app) {
     app.post("/deck/create",
             sessionMW(objectrepository),
             createDeckMW(objectrepository),
+            getTopDecksMW(objectrepository),
+            renderMW(objectrepository, 'user')
     );
 
 };

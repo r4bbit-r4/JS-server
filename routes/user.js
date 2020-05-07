@@ -32,31 +32,29 @@ module.exports = function (app) {
     // Get user page, handle session presence, then get user data and render the profile page
     app.get("/user",
             sessionMW(objectrepository),
-            getUserMW(objectrepository),
             getDeckMW(objectrepository),
             renderMW(objectrepository,'user')
     );
 
     // Get user modification page, handle session presence, then get user data and render page
-    app.get("/user/edit/:userid",
+    app.get("/user/edit",
             sessionMW(objectrepository),
-            getUserMW(objectrepository),
             renderMW(objectrepository,'updateuser')
     );
 
     // Post data to modification age, handle session then update the user
-    app.post("/user/edit/:userid",
+    app.post("/user/edit",
             sessionMW(objectrepository),
-            getUserMW(objectrepository),
             updateUserMW(objectrepository),
             getDeckMW(objectrepository),
             renderMW(objectrepository, "user")
     );
 
+
+
     // Post data to user removal page, handle session then remove the user
-    app.get("/user/del/:userid",
+    app.get("/user/del",
             sessionMW(objectrepository),
-            getUserMW(objectrepository),
             deleteUserMW(objectrepository),
             renderMW(objectrepository, "login")
     );

@@ -15,7 +15,7 @@ module.exports = function(objectrepository) {
             if (err) {
                 return next(err);
             }
-            // Or continue with resultss
+            // Or continue with results
             res.locals.decklist = decklist;
             return next();
         });

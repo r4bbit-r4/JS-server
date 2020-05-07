@@ -10,10 +10,14 @@ module.exports = function(objectrepository) {
     return function(req, res, next) {
 
         // Update user with given data
-        res.locals.user.name = req.body.name;
-        res.locals.user.address = req.body.email;
-        res.locals.user.password = req.body.name;
-        res.locals.user.save();
+        if ( res.locals.user !== 'undefined') {
+            res.locals.user.name = req.body.name;
+            res.locals.user.address = req.body.email;
+            res.locals.user.password = req.body.name;
+            res.locals.user.save();
+        }
+
+        console.log(res.locals.user);
 
         return next();
     };

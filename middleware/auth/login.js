@@ -8,16 +8,19 @@ module.exports = function(objectrepository) {
     const UserModel = requireoption(objectrepository, 'UserModel');
 
     return function(req, res, next) {
-        // Try loading the deck list
-        console.log(req.body);
-        UserModel.findOne({name:req.body.username, password: req.body.password}, (err, user)=> {
-            // If there's an error send it and print the error to a message
+
+        UserModel.findOne({name:req.body.username, password: req.body.password}, (err, user) => {
+
             if (err || !user || !req.body.username || !req.body.password) {
                 res.redirect("/login/uerror");
             }
-            // Or continue with results
+
+            // Set locals
             res.locals.user = user;
-            res.locals.loggedin = true;
+
+            // Update session
+            req.session.user = user;
+            req.session.save();
 
             return next();
         });

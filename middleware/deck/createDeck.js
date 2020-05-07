@@ -16,6 +16,6 @@ module.exports = function(objectrepository) {
         NewDeck.content = req.body.content;
         NewDeck.save();
 
-        res.redirect("/user")
+        return next()
     };
 };
