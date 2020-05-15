@@ -14,7 +14,7 @@ module.exports = function(objectrepository) {
             return next(err);
         });
 
-        return next();
+        res.redirect("/user");
     };
 
 };

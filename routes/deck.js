@@ -58,8 +58,6 @@ module.exports = function (app) {
             sessionMW(objectrepository),
             getDeckMW(objectrepository),
             deleteDeckMW(objectrepository),
-            getTopDecksMW(objectrepository),
-            renderMW(objectrepository, 'user')
     );
 
     // Post data to deck creation page
@@ -72,8 +70,6 @@ module.exports = function (app) {
     app.post("/deck/create",
             sessionMW(objectrepository),
             createDeckMW(objectrepository),
-            getTopDecksMW(objectrepository),
-            renderMW(objectrepository, 'user')
     );
 
 };

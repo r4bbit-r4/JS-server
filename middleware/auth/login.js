@@ -20,6 +20,7 @@ module.exports = function(objectrepository) {
 
             // Update session
             req.session.user = user;
+            req.session.loggedin = true;
             req.session.save();
 
             return next();

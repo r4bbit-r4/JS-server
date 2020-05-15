@@ -41,8 +41,7 @@ module.exports = function (app) {
     // Logout mw, logs user out hten redirects
     app.get("/logout",
         logoutMW(objectrepository),
-        getDeckMW(objectrepository),
-        renderMW(objectrepository, 'index')
+        renderMW(objectrepository, 'login')
     );
 
     // Get login form, simply render it

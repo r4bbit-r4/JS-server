@@ -16,14 +16,8 @@ app.use(session({
     secret: 'LHU0GL',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { secure: false }
 }))
-
-app.use((req,res,next) => {
-    console.log(Date.now());
-    console.log(req.session);
-    return next();
-})
 
 // Handle errors
 app.use((err, req, res, next)=> {

@@ -11,6 +11,7 @@ module.exports = function(objectrepository) {
 
         // Delete user from db
         res.locals.user.remove();
+        req.session.destroy()
 
         return next();
     };

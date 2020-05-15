@@ -13,10 +13,10 @@
                     <div class="w3-container w3-center w3-padding">
                         <h3>Your profile</h3>
                         <img src="avatar.png" alt="Avatar" style="width:80%">
-                        <h5>John Doe</h5>
+                        <h5><%= user.name%></h5>
 
-                        <a href="/user/edit/<%=user._id%>"><button class="w3-button w3-green">Modify data</button></a>
-                        <a href="/user/del/<%=user._id%>"><button class="w3-button w3-red">Delete user</button></a>
+                        <a href="/user/edit"><button class="w3-button w3-green">Modify data</button></a>
+                        <a href="/user/del"><button class="w3-button w3-red">Delete user</button></a>
                     </div>
 
                 </div>
