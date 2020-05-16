@@ -14,7 +14,7 @@ module.exports = function(objectrepository) {
             req.body.password1 === 'undefined' ||
             req.body.password2 === 'undefined' ) {
 
-            res.redirect("/");
+            return next("asd");
         }
 
         res.locals.user.password = req.body.password1;

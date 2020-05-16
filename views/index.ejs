@@ -4,10 +4,6 @@
 <section>
     <div class="w3-container">
         <h3>Decks</h3>
-        <form action="">
-            <input class="" type="text" placeholder="Search.." name="search">
-            <button class="w3-button" type="submit"><i class="fa fa-search"></i></button>
-        </form>
         <hr style="border-top: 1px solid black">
     </div>
     <!-- Main section with contents -->
@@ -24,11 +20,6 @@
                     <!-- Buttons -->
                     <button class="w3-btn w3-black w3-hover-black">Download</button>
                     <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn w3-black w3-hover-black">Details</button>
-                    <% if (typeof loggedin != 'undefined') { %>
-                        <button class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
-                        <a href="/deck/edit"><button class="w3-btn w3-blue"><i class="fa fa-pencil"></i></button></a>
-                        <!-- Details modal -->
-                    <% }; %>
                     <div id="id01" class="w3-modal">
                         <div class="w3-modal-content">
                             <div class="w3-container w3-padding">

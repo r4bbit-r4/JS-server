@@ -10,7 +10,6 @@ module.exports = function (objectrepository) {
     return function (req, res, next) {
 
         if (req.session) {
-
             if (req.session.loggedin !== 'undefined' && req.session.loggedin === true ) {
                 res.locals.loggedin = true;
                 res.locals.user = req.session.user;

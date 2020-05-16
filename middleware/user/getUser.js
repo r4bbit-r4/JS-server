@@ -5,14 +5,14 @@ const requireoption = require('../../requireOption');
 
 module.exports = function(objectrepository) {
     // Try loading the UserModel
-    const DeckModel = requireoption(objectrepository, 'UserModel');
+    const UserModel = requireoption(objectrepository, 'UserModel');
 
     return function(req, res, next) {
         // Try loading the deck list
-        DeckModel.findOne({name: req.body.username}, (err, user)=> {
-            // If there's an error send it
-            if (err || user === 'undefined') {
-                res.redirect("/");
+        UserModel.findOne({name: req.body.username}, (err, user)=> {
+            // If there's an error, redirect to index page
+            if (err || !user ) {
+                return next(err);
             }
             // Or continue with results
             res.locals.user = user;
